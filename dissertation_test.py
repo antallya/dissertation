@@ -7,28 +7,32 @@ from scipy.stats import binom
 df=pd.read_csv("/home/antalya/CLionProjects/AntalyasGuesser/sampleFiles/results.csv",
                header=None, usecols=list(range(0,32)))
 print(df.head())
+# number of hashes per experiment
 n_values = [5,10,50,100,500,750,1000]
-# Setting theme
+# set theme
 sns.set_theme()
-xvalues=list(range(0,32,8))
-# Function for plotting each row of the dataframe
+xvalues=list(range(0,32, 2))
+# plotting each row of the dataFrame
 for index, row in df.iterrows():
     # plot
-    plt.figure(figsize=(8,4))
-    sns.lineplot(x=row.index, y=row.values)
+    plt.figure(figsize=(8,6))
+    sns.lineplot(x=row.index, y=row.values, color='navy')
 
     # binomial distribution
     for i, column in enumerate(row.index):
-        n = n_values[index]  # Use corresponding n value based on row index
-        p = 1 / (2**i)  # Probability for the binomial distribution
-        binom_value = binom.pmf(k=int(n*p), n=n, p=p)
+        if i == 0:
+            continue # skip the analysis of 0 bit position because the probability =1
 
-        # Plot the binomial point
-        plt.scatter(column, binom_value, color='red', label=f'Binom (n={n}, p=1/2^k)' if i == 0 else "")
-        
+        n = n_values[index]  # n value corresponding to row index
+        p = 1 / (2**i)  # binomial distribution probability
+        binom_value = binom.pmf(k=int(n*p), n=n, p=p) #binomial distn means!!!
+
+        # scatter plot for the binomial sigmoid
+        plt.scatter(column, binom_value, color='teal', label=f'Binom (n={n}, p=1/2^k)' if i == 0 else "")
+
     # labels and axis
     plt.xticks(xvalues)
-    plt.xlabel('Number of bytes (8 bits) analysed')
+    plt.xlabel('Number of bits analysed')
     plt.ylabel('Probability')
     plt.title('Probability of getting a zero per bit space analysed')
     plt.legend()
@@ -36,7 +40,6 @@ for index, row in df.iterrows():
     # display
     plt.show()
 
-#sns.relplot(data=df, x="probabilities", y="")
 
 
 
