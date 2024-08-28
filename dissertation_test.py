@@ -8,7 +8,7 @@ df=pd.read_csv("/home/antalya/CLionProjects/AntalyasGuesser/sampleFiles/results.
                header=None, usecols=list(range(0,32)))
 print(df.head())
 # number of hashes per experiment
-n_values = [5,10,50,100,500,750,1000]
+n_values = [5,10,100,500,750,1000]
 # set theme
 sns.set_theme()
 xvalues=list(range(0,32, 2))
@@ -19,6 +19,7 @@ for index, row in df.iterrows():
     sns.lineplot(x=row.index, y=row.values, color='navy')
 
     # binomial distribution
+    first_scat= True
     for i, column in enumerate(row.index):
         if i == 0:
             continue # skip the analysis of 0 bit position because the probability =1
@@ -32,7 +33,7 @@ for index, row in df.iterrows():
 
     # labels and axis
     plt.xticks(xvalues)
-    plt.xlabel('Number of bits analysed')
+    plt.xlabel('Number of bits analysed (p)')
     plt.ylabel('Probability')
     plt.title('Probability of getting a zero per bit space analysed')
     plt.legend()
