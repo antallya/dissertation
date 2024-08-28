@@ -16,10 +16,10 @@ xvalues=list(range(0,32, 2))
 for index, row in df.iterrows():
     # plot
     plt.figure(figsize=(8,6))
-    sns.lineplot(x=row.index, y=row.values, color='navy')
+    sns.lineplot(x=row.index, y=row.values, color='navy', label='Average Proportion of Zeros')
 
     # binomial distribution
-    first_scat= True
+    first_scatter= True
     for i, column in enumerate(row.index):
         if i == 0:
             continue # skip the analysis of 0 bit position because the probability =1
@@ -28,14 +28,18 @@ for index, row in df.iterrows():
         p = 1 / (2**i)  # binomial distribution probability
         binom_value = binom.pmf(k=int(n*p), n=n, p=p) #binomial distn means!!!
 
-        # scatter plot for the binomial sigmoid
-        plt.scatter(column, binom_value, color='teal', label=f'Binom (n={n}, p=1/2^k)' if i == 0 else "")
+        # Scatter plot for the binomial distribution
+        if first_scatter:
+            plt.scatter(column, binom_value, color='teal', label=f'Binom (n={n}, p=1/2^k)')
+            first_scatter = False
+        else:
+            plt.scatter(column, binom_value, color='teal')
 
     # labels and axis
     plt.xticks(xvalues)
     plt.xlabel('Number of bits analysed (p)')
     plt.ylabel('Probability')
-    plt.title('Probability of getting a zero per bit space analysed')
+    plt.title('Average Proportion of Zeros per p bits analysed')
     plt.legend()
 
     # display
