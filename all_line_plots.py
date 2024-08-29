@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import binom
 
-df = pd.read_csv("/home/antalya/CLionProjects/AntalyasGuesser/sampleFiles/results.csv",
+df = pd.read_csv("/home/antalya/CLionProjects/AntalyasGuesser/sampleFiles/64bits/results.csv",
                  header=None, usecols=list(range(0,64)))
 # number of hashes per experiment
 n_values = [5, 10, 100, 500, 750, 1000]
