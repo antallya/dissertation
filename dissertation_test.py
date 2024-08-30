@@ -41,9 +41,11 @@ for index, row in df.iterrows():
     plt.ylabel('Probability')
     plt.title('Average Proportion of Zeros per p bits analysed')
     plt.legend()
+    plt.savefig(f'binom_intersection_{index}.png')
 
     # display
     plt.show()
+
 
 
 
