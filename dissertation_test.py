@@ -25,15 +25,15 @@ for index, row in df.iterrows():
             continue # skip the analysis of 0 bit position because the probability =1
 
         n = n_values[index]  # n value corresponding to row index
-        p = 1 / (2**i)  # binomial distribution probability
+        p = 1 / (2)  # binomial distribution probability
         binom_value = binom.pmf(k=int(n*p), n=n, p=p) #binomial distn means!!!
 
         # Scatter plot for the binomial distribution
         if first_scatter:
-            plt.scatter(column, binom_value, color='teal', label=f'Binom (n={n}, p=1/2^k)')
+            plt.scatter(column, p, color='teal', label=f'Binom (n={n}, p=1/2^k)')
             first_scatter = False
         else:
-            plt.scatter(column, binom_value, color='teal')
+            plt.scatter(column, p, color='teal')
 
     # labels and axis
     plt.xticks(xvalues)
