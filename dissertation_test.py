@@ -23,7 +23,7 @@ for index, row in df.iterrows():
     plt.ylabel('Proportion of Zeros')
     plt.title('Average Proportion of Zeros per p bits analysed')
     plt.legend()
-    plt.savefig(f'empirical_proportion_{index}.png')
+    #plt.savefig(f'empirical_proportion_{index}.png')
     plt.show()
 
     # deviation from 0.5
@@ -41,6 +41,6 @@ for index, row in df.iterrows():
     plt.ylabel('Deviation from 0.5')
     plt.title('Deviation of Proportion of Zeros from 0.5')
     plt.legend()
-    plt.savefig(f'deviation_{index}.png')
+    #plt.savefig(f'deviation_{index}.png')
     plt.show()
 

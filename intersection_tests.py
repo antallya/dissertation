@@ -30,7 +30,7 @@ plt.ylabel('Cardinality Estimate')
 plt.title('HLL Estimates vs Actual Unique Entries')
 plt.legend(loc='center', bbox_to_anchor=(0.9, 0.2), fontsize='small')
 plt.grid(True)
-plt.savefig(f'HLLvsActual.png')
+#plt.savefig(f'HLLvsActual.png')
 plt.show()
 
 
@@ -46,6 +46,6 @@ plt.ylabel('Average Proportion of Zeros')
 plt.title('Empirical Proportion of Zeros vs Bit Size')
 plt.legend()
 plt.grid(True)
-plt.savefig(f'AllEmpiricalProportions.png')
+#plt.savefig(f'AllEmpiricalProportions.png')
 plt.show()
 
