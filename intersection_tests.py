@@ -19,18 +19,19 @@ dfHll.index = n_values
 sns.set_theme()
 
 # HLL estimates vs actual unique entries
-plt.figure(figsize=(14, 8))
+plt.figure(figsize=(14, 16))
 
 for i, sample_size in enumerate(dfHll.index):
     plt.plot(dfHll.columns, dfHll.loc[sample_size], marker='o', label=f'Sample Size {sample_size} HLL Estimate')
     plt.plot(dfHll.columns, [actual_unique_entries[i]] * len(dfHll.columns), '--', label=f'Actual Unique Entries (Sample Size {sample_size})')
 
-plt.xlabel('Bit Size (p)')
-plt.ylabel('Cardinality Estimate')
+plt.yticks(range(0, 1001, 50))
+plt.xlabel('Number of bits analysed (p)')
+plt.ylabel('Cardinality Estimate (unique elements)')
 plt.title('HLL Estimates vs Actual Unique Entries')
-plt.legend(loc='center', bbox_to_anchor=(0.9, 0.2), fontsize='small')
+plt.legend(loc='center', bbox_to_anchor=(0.75, 0.3), fontsize='medium')
 plt.grid(True)
-#plt.savefig(f'HLLvsActual.png')
+plt.savefig(f'HLLvsActual.png')
 plt.show()
 
 
