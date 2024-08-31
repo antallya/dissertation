@@ -68,6 +68,6 @@ plt.show()
 
 # p-Value vs. Bit Position for different sample sizes
 sns.lineplot(data=results_df, x='Bit Position (i)', y='p-Value', hue='Sample Size (n)')
-plt.axhline(0.05, color='red', linestyle='--')  # Significance level
+plt.axhline(0.05, color='red', linestyle='--')  # significance level
 plt.title('p-Value vs. Bit Position for Different Sample Sizes')
 plt.show()
