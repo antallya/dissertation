@@ -5,48 +5,42 @@ import seaborn as sns
 from scipy.stats import binom
 
 df=pd.read_csv("/home/antalya/CLionProjects/AntalyasGuesser/sampleFiles/64bits/results.csv",
-               header=None, usecols=list(range(0,32)))
-print(df.head())
+               header=None, usecols=list(range(4,19)))
+
 # number of hashes per experiment
 n_values = [5,10,100,500,750,1000]
-# set theme
 sns.set_theme()
-xvalues=list(range(0,32, 2))
-# plotting each row of the dataFrame
+xvalues=list(range(4,19))
+
 for index, row in df.iterrows():
-    # plot
-    plt.figure(figsize=(8,6))
-    sns.lineplot(x=row.index, y=row.values, color='navy', label='Average Proportion of Zeros')
+    # empirical distribution of proportion of zeros
+    plt.figure(figsize=(12, 6))
+    sns.lineplot(x=xvalues, y=row.values, color='navy', label='Average Proportion of Zeros')
+    plt.axhline(y=0.5, color='teal', linestyle='--', label='Expected Proportion (0.5)')
 
-    # binomial distribution
-    first_scatter= True
-    for i, column in enumerate(row.index):
-        if i == 0:
-            continue # skip the analysis of 0 bit position because the probability =1
-
-        n = n_values[index]  # n value corresponding to row index
-        p = 1 / (2)  # binomial distribution probability
-        binom_value = binom.pmf(k=int(n*p), n=n, p=p) #binomial distn means!!!
-
-        # Scatter plot for the binomial distribution
-        if first_scatter:
-            plt.scatter(column, p, color='teal', label=f'Binom (n={n}, p=1/2^k)')
-            first_scatter = False
-        else:
-            plt.scatter(column, p, color='teal')
-
-    # labels and axis
     plt.xticks(xvalues)
     plt.xlabel('Number of bits analysed (p)')
-    plt.ylabel('Probability')
+    plt.ylabel('Proportion of Zeros')
     plt.title('Average Proportion of Zeros per p bits analysed')
     plt.legend()
-    plt.savefig(f'binom_intersection_{index}.png')
-
-    # display
+    # plt.savefig(f'empirical_proportion_{index}.png')
     plt.show()
 
+    # deviation from 0.5
+    plt.figure(figsize=(12, 6))
+    deviation_from_05 = np.abs(row.values - 0.5)
+    sns.lineplot(x=xvalues, y=deviation_from_05, color='red', label='Deviation from 0.5')
 
+    threshold = 0.05  # threshold error for small devs
+    small_deviation_indices = np.where(deviation_from_05 < threshold)[0]
+    plt.scatter(x=np.array(xvalues)[small_deviation_indices],
+                y=deviation_from_05[small_deviation_indices], color='orange', label='Small Deviations')
 
-
+    plt.xticks(xvalues)
+    plt.xlabel('Number of bits analysed (p)')
+    plt.ylabel('Deviation from 0.5')
+    plt.title('Deviation of Proportion of Zeros from 0.5')
+    plt.legend()
+    # plt.savefig(f'deviation_{index}.png')
+    plt.show()
 
