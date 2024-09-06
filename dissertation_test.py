@@ -15,7 +15,7 @@ xvalues=list(range(4,19))
 for index, row in df.iterrows():
     # empirical distribution of proportion of zeros
     plt.figure(figsize=(12, 8))
-    sns.lineplot(x=xvalues, y=row.values, color='navy', label=f'Average Proportion of Zeros (Sample Size: {n_values[index]})')
+    sns.lineplot(x=xvalues, y=row.values, color='navy', label=f'Average Proportion of Zeros (Sample Size: {n_values[index]})', marker='o')
     plt.axhline(y=0.5, color='teal', linestyle='--', label='Expected Proportion (0.5)')
 
     # log2(n) --> max number of buckets
