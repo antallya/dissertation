@@ -6,7 +6,7 @@ These folders contain the visualizations generated from the analysis of the buck
 ## Visualization Details
 
 ### Empirical vs Theoretical Proportion of Zeros:
-- These plots compare the empirical proportion of zeros observed across different bit positions with the expected binomial distribution $X_i \sim Binomial(n, \frac{1}{2}$
+- These plots compare the empirical proportion of zeros observed across different bit positions with the expected binomial distribution $X_i \sim Binomial(n, \frac{1}{2})$
 - The x-axis represents different sample sizes, while the y-axis represents the proportion of zeros.
 - The point where the two distributions align or almost align is where the bucket parameter $k$ is optimal.
 
